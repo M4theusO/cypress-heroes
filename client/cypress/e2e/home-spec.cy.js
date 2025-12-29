@@ -51,7 +51,7 @@ describe('home page', () => {
                 });
                 cy.get('@firstHero').find('[data-cy=like]').click();
                 cy.get('@fanCount').then((fanCount) => {
-                cy.get('@fanSpan').should('have.text', Number(fanCount) + 1);
+                    cy.get('@fanSpan').should('have.text', Number(fanCount) + 1);
                 });
             });
         });
@@ -68,7 +68,7 @@ describe('home page', () => {
                 cy.get('@firstHero').find('[data-cy=money]').click();
                 cy.get('button').contains('Yes').click();
                 cy.get('@saveCount').then((saveCount) => {
-                cy.get('@saveSpan').should('have.text', Number(saveCount) + 1);
+                    cy.get('@saveSpan').should('have.text', Number(saveCount) + 1);
                 });
             });
         });
@@ -85,7 +85,7 @@ describe('home page', () => {
                 cy.get('@firstHero').find('[data-cy=money]').click();
                 cy.get('button').contains('No').click();
                 cy.get('@saveCount').then((saveCount) => {
-                cy.get('@saveSpan').should('have.text', Number(saveCount));
+                    cy.get('@saveSpan').should('have.text', Number(saveCount));
                 });
             });
         });
@@ -108,7 +108,7 @@ describe('home page', () => {
                 });
                 cy.get('@firstHero').find('[data-cy=like]').click();
                 cy.get('@fanCount').then((fanCount) => {
-                cy.get('@fanSpan').should('have.text', Number(fanCount) + 1);
+                    cy.get('@fanSpan').should('have.text', Number(fanCount) + 1);
                 });
             });
         });
@@ -125,7 +125,7 @@ describe('home page', () => {
                 cy.get('@firstHero').find('[data-cy=money]').click();
                 cy.get('button').contains('Yes').click();
                 cy.get('@saveCount').then((saveCount) => {
-                cy.get('@saveSpan').should('have.text', Number(saveCount) + 1);
+                    cy.get('@saveSpan').should('have.text', Number(saveCount) + 1);
                 });
             });
         });
@@ -153,7 +153,7 @@ describe('home page', () => {
                 cy.contains('Delete Hero?');
                 cy.get('button').contains('Yes').click();
                 cy.get('@heroName').then((name) => {
-                cy.getByCy('hero-card').contains(name).should('not.exist');
+                    cy.getByCy('hero-card').contains(name).should('not.exist');
                 });
             });
         });

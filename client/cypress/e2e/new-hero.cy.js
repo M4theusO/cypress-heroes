@@ -1,8 +1,5 @@
-export { };
-  
-describe('hero new page', () => {
+  describe('hero new page', () => {
   beforeEach(() => {
-    //intercept the request so we can get the new hero's id to delete it later
     cy.intercept({
       method: 'POST',
       url: '**/heroes',
@@ -10,7 +7,7 @@ describe('hero new page', () => {
   });
 
   afterEach(() => {
-    cy.get('@request').then((req: any) => {
+    cy.get('@request').then((req) => {
       cy.deleteHero(req.response.body.id);
     });
   });
@@ -18,11 +15,10 @@ describe('hero new page', () => {
   describe('when admin user is logged in', () => {
     beforeEach(() => {
       cy.login('admin@test.com', 'test123');
-      cy.visit(`/heroes/new`);
+      cy.visit('/heroes/new');
     });
 
     it('adding hero should save and display on home page', () => {
-      // cy.get<Prisma.Hero>('@newHero').then((newHero) => {
       cy.get('[data-cy=nameInput]').type('New Test Hero');
       cy.get('[data-cy=priceInput]').clear().type('12');
       cy.get('[data-cy=fansInput]').clear().type('34');
@@ -43,7 +39,6 @@ describe('hero new page', () => {
         .find('[data-cy=powers]')
         .should('contain.text', 'Fireball')
         .and('contain.text', 'Super Strength');
-      // });
     });
 
     it('should be able to upload new avatar', () => {
@@ -57,7 +52,7 @@ describe('hero new page', () => {
       );
       cy.get('button').contains('Submit').click();
       cy.location('pathname').should('equal', `/heroes`);
-      cy.get('@request').then((req: any) => {
+      cy.get('@request').then((req) => {
         cy.contains('[data-cy=hero-card]', 'New Test Hero')
           .as('heroCard')
           .find('img')

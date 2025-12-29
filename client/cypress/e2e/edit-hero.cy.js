@@ -1,5 +1,3 @@
-import Prisma from '@prisma/client';
-
 describe('hero edit page', () => {
   beforeEach(() => {
     cy.createHero().then((hero) => {
@@ -8,7 +6,7 @@ describe('hero edit page', () => {
   });
 
   afterEach(() => {
-    cy.get<Prisma.Hero>('@newHero').then((newHero) => {
+    cy.get('@newHero').then((newHero) => {
       cy.deleteHero(newHero.id);
     });
   });
@@ -16,13 +14,13 @@ describe('hero edit page', () => {
   describe('when admin user is logged in', () => {
     beforeEach(() => {
       cy.login('admin@test.com', 'test123');
-      cy.get<Prisma.Hero>('@newHero').then((newHero) => {
+      cy.get('@newHero').then((newHero) => {
         cy.visit(`/heroes/${newHero.id}/edit`);
       });
     });
 
     it('should contain hero information', () => {
-      cy.get<Prisma.Hero>('@newHero').then((newHero) => {
+      cy.get('@newHero').then((newHero) => {
         cy.get('[data-cy=price]').should('contain.text', `$${newHero.price}`);
         cy.get('[data-cy=fans]').should('contain.text', newHero.fans);
         cy.get('[data-cy=saves]').should('contain.text', newHero.saves);
@@ -31,7 +29,7 @@ describe('hero edit page', () => {
     });
 
     it('editing hero should save and display on home page', () => {
-      cy.get<Prisma.Hero>('@newHero').then((newHero) => {
+      cy.get('@newHero').then((newHero) => {
         cy.get('[data-cy=nameInput]').type(' edited');
         cy.get('[data-cy=priceInput]').clear().type('12');
         cy.get('[data-cy=fansInput]').clear().type('34');
@@ -56,7 +54,7 @@ describe('hero edit page', () => {
     });
 
     it('should be able to upload new avatar', () => {
-      cy.get<Prisma.Hero>('@newHero').then((newHero) => {
+      cy.get('@newHero').then((newHero) => {
         cy.get('[data-cy=avatarFile]').selectFile(
           './cypress/fixtures/avatar.jpg'
         );
